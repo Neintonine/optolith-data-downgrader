@@ -1,0 +1,28 @@
+{
+  "name": "optolith-data-downgrader",
+  "version": "1.0.0",
+  "description": "A script to downgrade the data from the new database to the old one",
+  "keywords": [
+    "optolith",
+    "dsa",
+    "dsa5",
+    "database"
+  ],
+  "license": "ISC",
+  "author": "Michel Fedde <contact@iedsoftworks.com>",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./build/build-cli.mjs",
+    "watch": "node ./build/watch.mjs",
+    "start:convert": "node ./dist/main.js convert"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.10.7",
+    "esbuild": "^0.24.2",
+    "commander": "^13.0.0",
+    "js-yaml": "^4.1.0"
+  }
+}

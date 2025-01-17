@@ -1,0 +1,26 @@
+{
+  "targetName": "Books",
+  "properties": [
+    {
+      "property": "id"
+    },
+    {
+      "property": "name"
+    },
+    {
+      "property": ["is_missing_implementation", "isMissingImplementation"]
+    },
+    {
+      "property": ["abbreviation", "short"]
+    },
+    {
+      "property": "isCore",
+      "modifier": {
+        "isCategory": "CoreRules"
+      }
+    },
+    {
+      "property": ["contains_adult_content", "isAdultContent"]
+    }
+  ]
+}
