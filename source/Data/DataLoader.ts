@@ -41,6 +41,6 @@ export class DataLoader {
 
             const data: unknown = yaml.load(file)
             return data;
-        });
+        }) as T;
     }
 }

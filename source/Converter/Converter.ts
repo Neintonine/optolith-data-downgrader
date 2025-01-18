@@ -2,11 +2,6 @@ import {Dir} from "node:fs";
 import * as fs from "node:fs";
 import path from "node:path";
 import * as yaml from 'js-yaml';
-import {
-    Entry,
-    Table,
-    OriginalFile
-} from "./File";
 import {Transformer} from "./Transformer";
 import {Modifiers} from "./Modifiers/Modifiers";
 
@@ -67,7 +62,7 @@ export default class Converter {
             })
         })
         
-        const data: OriginalFile = yaml.load(file)
+        const data: OriginalFile = <OriginalFile>yaml.load(file)
         
         const context: ConverterContext = {
             translation,

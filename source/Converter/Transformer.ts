@@ -1,6 +1,5 @@
 import {ConverterContext} from "./Converter";
 import {Property} from "../Translations/Property";
-import {Entry, OriginalFile, TranslatedProperty} from "./File";
 
 export class Transformer {
     public async convertEntry(context:ConverterContext): Promise<Entry> {

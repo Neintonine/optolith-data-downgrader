@@ -1,11 +1,11 @@
-type OriginalFile = Dictionary<unknown>
+type OriginalFile = Dictionary<any>
 type Entry = Map<string, TranslatedProperty>
 
 type Table = Entry[]
 
-type TranslatedProperty = Dictionary<unknown>
+type TranslatedProperty = Dictionary<any>
 
-type FormattedEntry = Dictionary<unknown>
+type FormattedEntry = Dictionary<any>
 type FormattedTable = FormattedEntry[]
 type FormattedFile = {
     universal: FormattedTable,

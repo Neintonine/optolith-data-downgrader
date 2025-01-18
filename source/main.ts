@@ -58,7 +58,7 @@ program
             let translation;
             try {
                 translation = translationContainer.loadTranslation(type);
-            } catch (e: {message: string}) {
+            } catch (e: any) {
                 console.error(e.message);
                 throw e;
             }

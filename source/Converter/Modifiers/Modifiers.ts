@@ -1,19 +1,18 @@
-import {TranslatedProperty, OriginalFile} from '../File';
 import * as category from './category'
 import * as string from './string'
-import * as activatable from './activatable.mjs'
+import * as activatable from './activatable'
 import * as tree from "./tree"
 import {DataLoader} from "../../Data/DataLoader";
 
 export type ModifierContext = {
-    currentValue: unknown, 
-    parameter: unknown,
+    currentValue: any,
+    parameter: any,
     untransformedData: OriginalFile,
     language: string,
     dataLoader: DataLoader
 }
 
-export type Modifier = (context: ModifierContext) => unknown
+export type Modifier = (context: ModifierContext) => any
 export type ModifierStructure = Dictionary<Modifier>
 
 export type ModifierDefinition = {
