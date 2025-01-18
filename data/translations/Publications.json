@@ -16,7 +16,7 @@
     {
       "property": "isCore",
       "modifier": {
-        "isCategory": "CoreRules"
+        "category.isCategory": "CoreRules"
       }
     },
     {

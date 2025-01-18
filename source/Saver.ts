@@ -22,14 +22,14 @@ export class Saver {
             return;
         }
         
-        console.log("Destination folder already exists...")
+        console.warn("Destination folder already exists...")
         if (!force) {
-            console.log("\t... no additional folder has been created.")
+            console.warn("\t... no additional folder has been created.")
             
             return;
         }
         
-        console.log("\t... force-flag has been enabled. Trying to remove destination to start new.")
+        console.warn("\t... force-flag has been enabled. Trying to remove destination to start new.")
         
         await new Promise<void>((resolve, reject) => {
             fs.rm(this.destination, {

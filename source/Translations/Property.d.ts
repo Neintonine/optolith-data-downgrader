@@ -1,7 +1,7 @@
 import {ModifierDefinition} from "../Transformer/Modifiers/Modifiers";
 
 interface PropertyOptions {
-    universal: boolean;
+    universal: boolean|"both";
     modifier: ModifierDefinition;
 }
 

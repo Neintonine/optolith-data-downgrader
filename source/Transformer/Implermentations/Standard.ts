@@ -6,11 +6,15 @@ export class Standard implements Transformer {
     public getValue(data: OriginalFile, property: Property): TranslatedProperty {
         const universalValue = data[property.propertyFrom];
         
-        if (property.universal) {
+        if (property.universal === true) {
             return { universal: universalValue }
         }
         
         const result: TranslatedProperty = {};
+        if (property.universal === 'both') {
+            result.universal = universalValue
+        }
+        
         for (let langkey in data['translations']) {
             result[langkey] = data['translations'][langkey][property.propertyFrom] ?? universalValue;
         }

@@ -21,8 +21,11 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.10.7",
-    "esbuild": "^0.24.2",
     "commander": "^13.0.0",
+    "esbuild": "^0.24.2",
     "js-yaml": "^4.1.0"
+  },
+  "dependencies": {
+    "optolith-database-schema": "^0.17.2"
   }
 }

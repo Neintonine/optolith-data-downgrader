@@ -61,16 +61,15 @@ export default class Converter {
         const transformer = this.transformers.getInstanceForTransformer(translation.transformer);
         
         const newData: Entry = new Map<string, TranslatedProperty>();
-        translation.properties.forEach((property) => {
+        for (const property of translation.properties) {
             const newPropertyValue = transformer.getValue(data, property);
             
-            Object.entries(newPropertyValue).forEach(([key, value]) => {
-                newPropertyValue[key] = this.modifiers.apply(data, value, property.modifier)
-                
-            })
+            for (const [language, value] of Object.entries(newPropertyValue)) {
+                newPropertyValue[language] = await this.modifiers.apply(data, value, language, property.modifier)
+            }
             newData.set(property.propertyTo, newPropertyValue);
-        })
-        
+        }
+
         return newData;
     }
 

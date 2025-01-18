@@ -2,6 +2,7 @@ import * as fs from "node:fs";
 import path from "node:path";
 import TranslationNotFoundError from "./TranslationNotFoundError";
 import {LoadedProperty, Property} from "./Property";
+import {glob} from "node:fs";
 
 export default class TranslationContainer {
 
@@ -45,5 +46,19 @@ export default class TranslationContainer {
                 }
             })
         }
+    }
+
+    public async getTranslationNames(): Promise<string[]> {
+        const matches = await new Promise<string[]>((resolve, reject) => {
+            glob(
+                `${this.translationPath}/*.json`,
+                (err, matches) => {
+                    if (err) reject(err);
+                    resolve(matches)
+                }
+            )
+        })
+        
+        return matches.map((matchedPath) => path.basename(matchedPath, '.json'))
     }
 }

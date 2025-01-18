@@ -1,0 +1,85 @@
+{
+  "properties": [
+    {
+      "property": "id",
+      "universal": "both",
+      "modifier": {
+        "string.prefix": "DISADV_"
+      }
+    },
+    {
+      "property": ["ap_value", "cost"],
+      "universal": true,
+      "modifier": {
+        "activatable.calculateCost": null
+      }
+    },
+    {
+      "property": [ "has_maximum_spent_influence","noMaxAPInfluence"],
+      "universal": true
+    },
+    {
+      "property": ["is_exclusive_to_arcane_spellworks", "isExclusiveToArcaneSpellworks"],
+      "universal": true
+    },
+    {
+      "property": ["levels", "levels"],
+      "universal": true
+    },
+    {
+      "property": ["maximum", "max"],
+      "universal": true
+    },
+    {
+      "property": "hasToBeCommonOrSuggestedByRCP",
+      "universal": true,
+      "modifier": {
+        "activatable.hasPrerequisiteTag": "CommonSuggestedByRCP"
+      }
+    },
+    {
+      "__comment": "This is not used at all! I have no clue how to use it, so currently it does nothing",
+      "property": "prerequisitesIndex",
+      "universal": true
+    },
+    {
+      "property": "gr",
+      "universal": true
+    },
+    {
+      "property": "name"
+    },
+    {
+      "property": ["name_in_library", "nameInWiki"]
+    },
+    {
+      "property": "rules"
+    },
+    {
+      "property": "input"
+    },
+    {
+      "property": "range"
+    },
+    {
+      "property": ["ap_value_append", "apValueAppend"]
+    },
+    {
+      "property": "prerequisites",
+      "modifier": {
+        "tree.getTranslatedValue": {
+          "path": "prerequisite.single.text.translations"
+        }
+      }
+    },
+    {
+      "property": "errata"
+    },
+    {
+      "property": "src",
+      "modifier": {
+        "activatable.convertSource": null
+      }
+    }
+  ]
+}
