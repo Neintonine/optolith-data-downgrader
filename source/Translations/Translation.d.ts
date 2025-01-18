@@ -1,7 +1,6 @@
 interface TranslationOptions {
     targetName: string,
     dependsOn: string[],
-    transformer: string,
 }
 
 interface LoadedTranslation extends Nullable<TranslationOptions> {

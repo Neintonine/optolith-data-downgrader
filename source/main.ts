@@ -2,14 +2,14 @@ import {Command} from "commander";
 import Converter from "./Converter/Converter";
 import TranslationContainer from "./Translations/TranslationContainer";
 import path from "node:path";
-import {Transformers} from "./Transformer/Transformers";
-import {Modifiers} from "./Transformer/Modifiers/Modifiers";
+import {Transformer} from "./Converter/Transformer";
+import {Modifiers} from "./Converter/Modifiers/Modifiers";
 import {SaveContext, Saver} from "./Saver";
 import {DataLoader} from "./Data/DataLoader";
 import {CachingDictionary} from "./Data/CachingDictionary";
 import fs from "node:fs";
 
-const FIXED_FOLDERNAMES = [
+const FIXED_FOLDER_NAMES = [
     'univ',
     'de-DE',
     'en-US',
@@ -47,7 +47,7 @@ program
         
         const translationContainer = new TranslationContainer(translationPath)
         const dataLoader = new DataLoader(sourcePath, new CachingDictionary<string, any>(25))
-        const converter = new Converter(new Transformers(), new Modifiers(dataLoader))
+        const converter = new Converter(new Transformer(), new Modifiers(dataLoader))
         const saver = new Saver(path.resolve(destinationPath), overrideExistingFiles);
         
         if (entries.length < 1) {
@@ -58,7 +58,7 @@ program
             let translation;
             try {
                 translation = translationContainer.loadTranslation(type);
-            } catch (e: any) {
+            } catch (e: {message: string}) {
                 console.error(e.message);
                 throw e;
             }
@@ -81,7 +81,7 @@ program
         
         console.log("Saving...");
         
-        await saver.ensureAvailability(FIXED_FOLDERNAMES, cleanDestination);
+        await saver.ensureAvailability(FIXED_FOLDER_NAMES, cleanDestination);
         await saver.save(saveContexts);
     })
 

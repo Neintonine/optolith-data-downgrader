@@ -1,8 +1,7 @@
-import {Entry, FormattedEntry, FormattedFile, FormattedTable, Table} from "./Transformer/Transformer";
+import {FormattedEntry, FormattedFile, FormattedTable, Table} from "./Converter/File";
 import * as fs from "node:fs";
 import path from "node:path";
-import {context} from "esbuild";
-import jsyaml from "js-yaml";
+import yaml from "js-yaml";
 
 export type SaveContext = {
     table: Table, 
@@ -16,9 +15,9 @@ export class Saver {
     ) {
     }
     
-    public async ensureAvailability(foldernames: string[], force: boolean) {
+    public async ensureAvailability(folderNames: string[], force: boolean) {
         if (!fs.existsSync(this.destination)) {
-            await this.createFolders(foldernames);
+            await this.createFolders(folderNames);
             return;
         }
         
@@ -41,13 +40,13 @@ export class Saver {
             })
         })
         
-        await this.createFolders(foldernames);
+        await this.createFolders(folderNames);
     }
     
-    private async createFolders(foldernames: string[]): Promise<void> {
-        const promises = foldernames.map((name) => {
+    private async createFolders(folderNames: string[]): Promise<void> {
+        const promises = folderNames.map((name) => {
             return new Promise<void>((resolve, reject) => {
-                fs.mkdir(path.resolve(this.destination, name), {recursive: true}, (err, path) => {
+                fs.mkdir(path.resolve(this.destination, name), {recursive: true}, (err) => {
                     if (err) reject(err);
                     resolve()
                 })
@@ -82,7 +81,7 @@ export class Saver {
             return;
         }
         
-        const data = jsyaml.dump(table);
+        const data = yaml.dump(table);
         return new Promise<void>((resolve, reject) => {
             fs.writeFile(
                 targetPath,
@@ -108,17 +107,17 @@ export class Saver {
             const languages: Dictionary<FormattedEntry> = {};
 
             entry.forEach((translations, propertyKey) => {
-                Object.entries(translations).forEach(([langaugeKey, propertyValue]) => {
-                    if (langaugeKey === 'universal') {
+                Object.entries(translations).forEach(([languageKey, propertyValue]) => {
+                    if (languageKey === 'universal') {
                         universal[propertyKey] = propertyValue;
                         return;
                     }
 
-                    if (!(langaugeKey in languages)) {
-                        languages[langaugeKey] = {};
-                        usedLanguages.push(langaugeKey);
+                    if (!(languageKey in languages)) {
+                        languages[languageKey] = {};
+                        usedLanguages.push(languageKey);
                     }
-                    languages[langaugeKey][propertyKey] = propertyValue;
+                    languages[languageKey][propertyKey] = propertyValue;
                 })
             })
 

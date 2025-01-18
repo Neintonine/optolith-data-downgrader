@@ -2,14 +2,23 @@ import {Dir} from "node:fs";
 import * as fs from "node:fs";
 import path from "node:path";
 import * as yaml from 'js-yaml';
-import {FormattedFile, Entry, TranslatedProperty, FormattedEntry, Table} from "../Transformer/Transformer";
-import {Transformers} from "../Transformer/Transformers";
-import {Modifiers} from "../Transformer/Modifiers/Modifiers";
-import {stringify} from "node:querystring";
+import {
+    Entry,
+    Table,
+    OriginalFile
+} from "./File";
+import {Transformer} from "./Transformer";
+import {Modifiers} from "./Modifiers/Modifiers";
+
+export type ConverterContext = {
+    data: OriginalFile,
+    translation: Translation,
+    modifiers: Modifiers
+}
 
 export default class Converter {
     constructor(
-        private readonly transformers: Transformers,
+        private readonly transformer: Transformer,
         private readonly modifiers: Modifiers
     ) {}
     
@@ -28,6 +37,7 @@ export default class Converter {
         const promises: Promise<Entry>[] = [];
         
         let entry: fs.Dirent | null;
+        // eslint-disable-next-line no-cond-assign
         while (entry = await directory.read()) {
             if (!entry.isFile()) {
                 continue;
@@ -57,20 +67,15 @@ export default class Converter {
             })
         })
         
-        const data: any = yaml.load(file)
-        const transformer = this.transformers.getInstanceForTransformer(translation.transformer);
+        const data: OriginalFile = yaml.load(file)
         
-        const newData: Entry = new Map<string, TranslatedProperty>();
-        for (const property of translation.properties) {
-            const newPropertyValue = transformer.getValue(data, property);
-            
-            for (const [language, value] of Object.entries(newPropertyValue)) {
-                newPropertyValue[language] = await this.modifiers.apply(data, value, language, property.modifier)
-            }
-            newData.set(property.propertyTo, newPropertyValue);
+        const context: ConverterContext = {
+            translation,
+            data,
+            modifiers: this.modifiers
         }
-
-        return newData;
+        
+        return this.transformer.convertEntry(context);
     }
 
 

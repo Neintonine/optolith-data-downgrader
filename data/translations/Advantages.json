@@ -1,4 +1,7 @@
 {
+  "dependsOn": [
+    "Publications"
+  ],
   "properties": [
     {
       "property": "id",
@@ -80,6 +83,13 @@
       "modifier": {
         "activatable.convertSource": null
       }
+    },
+    {
+      "property": ["select_options", "selectOptions"],
+      "modifier": {
+        "activatable.convertSelectOptions": null
+      },
+      "universal": "both"
     }
   ]
 }

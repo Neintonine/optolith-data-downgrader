@@ -1,4 +1,7 @@
 {
+  "dependsOn": [
+    "Publications"
+  ],
   "properties": [
     {
       "property": "id",

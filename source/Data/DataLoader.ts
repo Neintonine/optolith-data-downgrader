@@ -6,7 +6,7 @@ import * as yaml from "js-yaml";
 export class DataLoader {
     constructor(
         private readonly sourcePath: string,
-        private readonly cache: CachingDictionary<string, any>
+        private readonly cache: CachingDictionary<string, unknown>
     ) {
     }
     
@@ -39,7 +39,7 @@ export class DataLoader {
                 })
             })
 
-            const data: any = yaml.load(file)
+            const data: unknown = yaml.load(file)
             return data;
         });
     }

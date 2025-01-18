@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "property": "id",
+      "modifier": {
+        "string.prefix": "ATTR_"
+      }
+    },
+    {
+      "property": "name"
+    },
+    {
+      "property": ["abbreviation", "short"]
+    }
+  ]
+}

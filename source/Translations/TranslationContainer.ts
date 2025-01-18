@@ -31,7 +31,6 @@ export default class TranslationContainer {
         translationName: string
     ): Translation {
         return {
-            transformer: loadedTranslation.transformer ?? 'Standard',
             targetName: loadedTranslation.targetName ?? translationName,
             dependsOn: loadedTranslation.dependsOn ?? [],
             properties: loadedTranslation.properties.map((property: LoadedProperty): Property => {

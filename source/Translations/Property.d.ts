@@ -1,4 +1,4 @@
-import {ModifierDefinition} from "../Transformer/Modifiers/Modifiers";
+import {ModifierDefinition} from "../Converter/Modifiers/Modifiers";
 
 interface PropertyOptions {
     universal: boolean|"both";
